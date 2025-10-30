@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+
+html, body, #root { height: 100%; }
+
+body {
+  @apply bg-navy text-slate-200 font-inter selection:bg-neon-blue/20 selection:text-white;
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-md border border-white/10;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #4dd5ff 0%, #a78bfa 50%, #ff6ad5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
