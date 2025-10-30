@@ -14,8 +14,7 @@ export default function About() {
         >
           <motion.h2 variants={reveal(0)} className="text-3xl md:text-4xl font-poppins font-semibold">About</motion.h2>
           <motion.p variants={reveal(0.1)} className="mt-4 text-slate-300 leading-relaxed">
-            I'm a software developer focused on building immersive frontends and scalable cloud-native systems.
-            I thrive at the intersection of React, DevOps, and AWS—crafting delightful experiences powered by robust infra.
+           I'm a Full Stack developer wanting to develop new cool stuff blending React, Node.js, DevOps, and AWS to build experiences that look beautiful and scale effortlessly.
           </motion.p>
 
           <motion.div variants={reveal(0.2)} className="mt-8 grid md:grid-cols-2 gap-4">

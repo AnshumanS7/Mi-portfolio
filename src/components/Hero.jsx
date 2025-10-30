@@ -44,7 +44,6 @@ export default function Hero() {
           viewport={{ once: true, amount: 0.4 }}
         >
           <div>
-            <motion.span variants={reveal(0)} className="text-sm text-slate-400">INTRO</motion.span>
             <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-extrabold font-poppins mt-2 leading-tight">
               <span className="gradient-text">{resume.name}</span>
             </motion.h1>

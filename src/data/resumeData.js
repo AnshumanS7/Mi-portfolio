@@ -1,6 +1,6 @@
 export const resume = {
   name: 'Anshuman Singh',
-  title: 'Software Developer | DevOps Enthusiast',
+  title: 'Full Stack Developer',
   // TODO: Place your profile photo in src/assets and set the path below, e.g. '/src/assets/profile.jpg'
   avatar: 'anshuman image.jpg',
   contact: {
