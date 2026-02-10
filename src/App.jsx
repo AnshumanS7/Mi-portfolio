@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Element, scroller } from 'react-scroll'
+import { ReactLenis } from '@studio-freight/react-lenis'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
@@ -21,21 +22,24 @@ function App() {
   }, [])
 
   return (
-    <div className="relative min-h-screen bg-grid-glow">
-      <BackgroundFX />
-      <Navbar />
-      <main className="relative z-10">
-        <Element name="home"><Hero /></Element>
-        <Element name="about"><About /></Element>
-        <Element name="experience"><Experience /></Element>
-        <Element name="projects"><Projects /></Element>
-        <Element name="try"><TryThis /></Element>
-        <Element name="skills"><Skills /></Element>
-        <Element name="certifications"><Certifications /></Element>
-        <Element name="contact"><Contact /></Element>
-      </main>
-      <Footer />
-    </div>
+    <ReactLenis root>
+      <div className="relative min-h-screen bg-grid-glow">
+        <div className="noise-overlay" />
+        <BackgroundFX />
+        <Navbar />
+        <main className="relative z-10">
+          <Element name="home"><Hero /></Element>
+          <Element name="about"><About /></Element>
+          <Element name="experience"><Experience /></Element>
+          <Element name="projects"><Projects /></Element>
+          <Element name="try"><TryThis /></Element>
+          <Element name="skills"><Skills /></Element>
+          <Element name="certifications"><Certifications /></Element>
+          <Element name="contact"><Contact /></Element>
+        </main>
+        <Footer />
+      </div>
+    </ReactLenis>
   )
 }
 

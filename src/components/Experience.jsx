@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { reveal, staggerContainer } from '../animations/variants'
+import SpotlightCard from './SpotlightCard'
 import { resume } from '../data/resumeData'
 
 export default function Experience() {
@@ -9,7 +10,7 @@ export default function Experience() {
         <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
           <motion.h2 variants={reveal(0)} className="text-3xl md:text-4xl font-poppins font-semibold">Experience</motion.h2>
           {resume.experience.map((exp) => (
-            <motion.div key={exp.company} variants={reveal(0.1)} className="mt-6 glass rounded-xl p-6">
+            <SpotlightCard key={exp.company} className="mt-6 p-6">
               <div className="flex flex-wrap items-center gap-2">
                 <div className="font-semibold">{exp.role}</div>
                 <div className="text-slate-400">· {exp.company}</div>
@@ -18,7 +19,7 @@ export default function Experience() {
               <ul className="mt-4 grid gap-2 list-disc list-inside text-slate-300">
                 {exp.bullets.map((b, i) => <li key={i}>{b}</li>)}
               </ul>
-            </motion.div>
+            </SpotlightCard>
           ))}
         </motion.div>
       </div>

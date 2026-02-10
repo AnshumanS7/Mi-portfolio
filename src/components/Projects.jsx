@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { motion, useAnimationFrame } from 'framer-motion'
 import { reveal } from '../animations/variants'
 import { resume } from '../data/resumeData'
+import SpotlightCard from './SpotlightCard'
 
 export default function Projects() {
   const projects = resume.projects
@@ -81,37 +82,37 @@ export default function Projects() {
             {nodes.map((n) => {
               const isActive = hovered === n.i || locked === n.i
               return (
-              <motion.button
-                key={n.name}
-                onMouseEnter={() => setHovered(n.i)}
-                onMouseLeave={() => setHovered(null)}
-                onClick={() => setLocked((prev) => prev === n.i ? null : n.i)}
-                animate={{ scale: isActive ? 1.18 : 1 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                className="absolute -translate-x-1/2 -translate-y-1/2"
-                style={{ left: `calc(50% + ${n.x}px)`, top: `calc(50% + ${n.y}px)` }}
-                aria-label={n.name}
-              >
-                <div className="absolute -inset-4 rounded-full blur-2xl" style={{
-                  background: isActive ? 'radial-gradient(circle, rgba(77,213,255,0.26) 0%, rgba(167,139,250,0.2) 40%, rgba(0,0,0,0) 70%)' : 'transparent'
-                }} />
-                <div className={`relative size-14 md:size-16 rounded-full grid place-items-center border ${isActive ? 'bg-gradient-to-br from-neon-blue/30 to-neon-violet/30 border-white/20 shadow-glow' : 'bg-white/5 border-white/10'} transition`}> 
-                  <span className="w-2 h-2 rounded-full bg-neon-blue/80" />
-                </div>
-                {(() => {
-                  const len = Math.hypot(n.x, n.y) || 1
-                  const ox = (n.x / len) * 10
-                  const oy = (n.y / len) * 10
-                  return (
-                    <div
-                      className={`mt-2 text-xs md:text-sm text-center w-28 -ml-7 ${isActive ? 'text-white' : 'text-slate-400'}`}
-                      style={{ transform: `translate(${ox}px, ${oy}px)` }}
-                    >
-                      {n.name}
-                    </div>
-                  )
-                })()}
-              </motion.button>
+                <motion.button
+                  key={n.name}
+                  onMouseEnter={() => setHovered(n.i)}
+                  onMouseLeave={() => setHovered(null)}
+                  onClick={() => setLocked((prev) => prev === n.i ? null : n.i)}
+                  animate={{ scale: isActive ? 1.18 : 1 }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                  className="absolute -translate-x-1/2 -translate-y-1/2"
+                  style={{ left: `calc(50% + ${n.x}px)`, top: `calc(50% + ${n.y}px)` }}
+                  aria-label={n.name}
+                >
+                  <div className="absolute -inset-4 rounded-full blur-2xl" style={{
+                    background: isActive ? 'radial-gradient(circle, rgba(77,213,255,0.26) 0%, rgba(167,139,250,0.2) 40%, rgba(0,0,0,0) 70%)' : 'transparent'
+                  }} />
+                  <div className={`relative size-14 md:size-16 rounded-full grid place-items-center border ${isActive ? 'bg-gradient-to-br from-neon-blue/30 to-neon-violet/30 border-white/20 shadow-glow' : 'bg-white/5 border-white/10'} transition`}>
+                    <span className="w-2 h-2 rounded-full bg-neon-blue/80" />
+                  </div>
+                  {(() => {
+                    const len = Math.hypot(n.x, n.y) || 1
+                    const ox = (n.x / len) * 10
+                    const oy = (n.y / len) * 10
+                    return (
+                      <div
+                        className={`mt-2 text-xs md:text-sm text-center w-28 -ml-7 ${isActive ? 'text-white' : 'text-slate-400'}`}
+                        style={{ transform: `translate(${ox}px, ${oy}px)` }}
+                      >
+                        {n.name}
+                      </div>
+                    )
+                  })()}
+                </motion.button>
               )
             })}
 
@@ -119,7 +120,7 @@ export default function Projects() {
 
             {/* Center detail card (pinned when locked, otherwise on hover) */}
             {(locked != null || hovered != null) && (
-              <motion.div
+              <SpotlightCard
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 glass rounded-2xl p-4 w-[260px] md:w-[300px] text-center"
                 animate={{ scale: 1.02 }}
                 transition={{ type: 'spring', stiffness: 200, damping: 18 }}
@@ -158,7 +159,7 @@ export default function Projects() {
                       <div className="mt-1 text-xs text-slate-400">{projects[idx].desc}</div>
                       <div className="mt-3 flex flex-wrap gap-1 justify-center">
                         {projects[idx].stack.map(s => (
-                      <span key={s} className="text-[10px] px-2 py-1 rounded bg-white/5 border border-white/10">{s}</span>
+                          <span key={s} className="text-[10px] px-2 py-1 rounded bg-white/5 border border-white/10">{s}</span>
                         ))}
                       </div>
                       <a
@@ -171,7 +172,7 @@ export default function Projects() {
                     </div>
                   )
                 })()}
-              </motion.div>
+              </SpotlightCard>
             )}
           </motion.div>
           {hovered == null && (
