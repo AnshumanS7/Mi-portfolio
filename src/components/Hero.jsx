@@ -1,11 +1,16 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { motion, useScroll, useTransform, useSpring, useMotionTemplate } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring, useMotionTemplate, AnimatePresence } from 'framer-motion'
 import { resume } from '../data/resumeData'
 import { fadeInUp, staggerContainer, reveal } from '../animations/variants'
 import { Link, scroller } from 'react-scroll'
+import Avatar from './Avatar.jsx'
+import RobotTrigger from './RobotTrigger'
+import Chatbot from './Chatbot'
 
 export default function Hero() {
+  const containerRef = useRef(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [showHi, setShowHi] = useState(false)
   const [showRocket, setShowRocket] = useState(false)
   const [rocketStart, setRocketStart] = useState({ x: 0, y: 0 })
@@ -35,7 +40,7 @@ export default function Hero() {
   const yGlow = useTransform(yMv, (v) => v - 8)
   return (
     <section className="relative pt-40 pb-24 md:pt-48 md:pb-28">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         <motion.div
           className="glass rounded-3xl p-8 md:p-12 shadow-glow relative overflow-hidden grid md:grid-cols-2 gap-8 items-center"
           variants={staggerContainer}
@@ -98,9 +103,9 @@ export default function Hero() {
                 <button aria-label="Resume" title="Resume" className="px-5 py-3 rounded-xl border border-white/20 hover:bg-white/10 transition grid place-items-center">
                   {/* File/Resume icon */}
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white/90">
-                    <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M14 2v5h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 13h6M9 16h6M9 10h3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M14 2v5h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M9 13h6M9 16h6M9 10h3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </button>
               </a>
@@ -123,9 +128,9 @@ export default function Hero() {
                 className="group p-2 rounded-xl glass hover:shadow-glow transition inline-flex"
               >
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4.983 3.5C4.983 4.60457 4.08757 5.5 2.983 5.5C1.87843 5.5 0.983002 4.60457 0.983002 3.5C0.983002 2.39543 1.87843 1.5 2.983 1.5C4.08757 1.5 4.983 2.39543 4.983 3.5Z" fill="#0A66C2"/>
-                  <path d="M1.25 8.25H4.75V22.25H1.25V8.25Z" fill="currentColor" className="text-slate-300 group-hover:text-neon-blue"/>
-                  <path d="M8.25 8.25H11.6V10.02H11.65C12.12 9.13 13.31 8.19 15.09 8.19C18.79 8.19 19.5 10.63 19.5 14.02V22.25H16V14.97C16 13.26 15.97 11.07 13.77 11.07C11.55 11.07 11.2 12.93 11.2 14.85V22.25H7.7V8.25H8.25Z" fill="currentColor" className="text-slate-300 group-hover:text-neon-blue"/>
+                  <path d="M4.983 3.5C4.983 4.60457 4.08757 5.5 2.983 5.5C1.87843 5.5 0.983002 4.60457 0.983002 3.5C0.983002 2.39543 1.87843 1.5 2.983 1.5C4.08757 1.5 4.983 2.39543 4.983 3.5Z" fill="#0A66C2" />
+                  <path d="M1.25 8.25H4.75V22.25H1.25V8.25Z" fill="currentColor" className="text-slate-300 group-hover:text-neon-blue" />
+                  <path d="M8.25 8.25H11.6V10.02H11.65C12.12 9.13 13.31 8.19 15.09 8.19C18.79 8.19 19.5 10.63 19.5 14.02V22.25H16V14.97C16 13.26 15.97 11.07 13.77 11.07C11.55 11.07 11.2 12.93 11.2 14.85V22.25H7.7V8.25H8.25Z" fill="currentColor" className="text-slate-300 group-hover:text-neon-blue" />
                 </svg>
               </a>
               <a
@@ -136,7 +141,7 @@ export default function Hero() {
                 className="group p-2 rounded-xl glass hover:shadow-glow transition inline-flex"
               >
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M12 1.75C6.615 1.75 2.25 6.115 2.25 11.5C2.25 15.77 5.005 19.37 8.84 20.69C9.34 20.78 9.52 20.47 9.52 20.21C9.52 19.98 9.51 19.36 9.51 18.59C7 19.1 6.35 17.66 6.35 17.66C5.9 16.51 5.2 16.2 5.2 16.2C4.24 15.54 5.27 15.56 5.27 15.56C6.33 15.64 6.88 16.66 6.88 16.66C7.83 18.3 9.38 17.83 10 17.57C10.09 16.88 10.37 16.42 10.68 16.18C8.6 15.94 6.41 15.09 6.41 11.6C6.41 10.6 6.77 9.79 7.37 9.17C7.27 8.93 6.95 7.99 7.47 6.69C7.47 6.69 8.23 6.44 9.51 7.41C10.23 7.2 11 7.09 11.77 7.09C12.54 7.09 13.31 7.2 14.03 7.41C15.31 6.44 16.07 6.69 16.07 6.69C16.59 7.99 16.27 8.93 16.17 9.17C16.77 9.79 17.13 10.6 17.13 11.6C17.13 15.1 14.94 15.94 12.86 16.17C13.26 16.48 13.61 17.09 13.61 18.01C13.61 19.28 13.59 20.16 13.59 20.21C13.59 20.47 13.77 20.78 14.27 20.69C18.105 19.37 20.86 15.77 20.86 11.5C20.86 6.115 16.495 1.75 11.11 1.75H12Z" fill="currentColor" className="text-slate-300 group-hover:text-neon-violet"/>
+                  <path fillRule="evenodd" clipRule="evenodd" d="M12 1.75C6.615 1.75 2.25 6.115 2.25 11.5C2.25 15.77 5.005 19.37 8.84 20.69C9.34 20.78 9.52 20.47 9.52 20.21C9.52 19.98 9.51 19.36 9.51 18.59C7 19.1 6.35 17.66 6.35 17.66C5.9 16.51 5.2 16.2 5.2 16.2C4.24 15.54 5.27 15.56 5.27 15.56C6.33 15.64 6.88 16.66 6.88 16.66C7.83 18.3 9.38 17.83 10 17.57C10.09 16.88 10.37 16.42 10.68 16.18C8.6 15.94 6.41 15.09 6.41 11.6C6.41 10.6 6.77 9.79 7.37 9.17C7.27 8.93 6.95 7.99 7.47 6.69C7.47 6.69 8.23 6.44 9.51 7.41C10.23 7.2 11 7.09 11.77 7.09C12.54 7.09 13.31 7.2 14.03 7.41C15.31 6.44 16.07 6.69 16.07 6.69C16.59 7.99 16.27 8.93 16.17 9.17C16.77 9.79 17.13 10.6 17.13 11.6C17.13 15.1 14.94 15.94 12.86 16.17C13.26 16.48 13.61 17.09 13.61 18.01C13.61 19.28 13.59 20.16 13.59 20.21C13.59 20.47 13.77 20.78 14.27 20.69C18.105 19.37 20.86 15.77 20.86 11.5C20.86 6.115 16.495 1.75 11.11 1.75H12Z" fill="currentColor" className="text-slate-300 group-hover:text-neon-violet" />
                 </svg>
               </a>
               <a
@@ -158,65 +163,13 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          <div className="relative justify-self-center">
+          <div className="relative justify-self-center z-10">
             {resume.avatar ? (
-              <div className="relative">
-                {/* Rotating neon ring with stronger glow */}
-                <motion.svg
-                  className="absolute -inset-6 md:-inset-7 pointer-events-none"
-                  viewBox="0 0 120 120"
-                  initial={{ rotate: 0, opacity: 0 }}
-                  animate={{ rotate: 360, opacity: 1 }}
-                  transition={{ rotate: { duration: 18, repeat: Infinity, ease: 'linear' }, opacity: { duration: 0.6 } }}
-                  aria-hidden
-                >
-                  <defs>
-                    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#4dd5ff" stopOpacity="0.95" />
-                      <stop offset="50%" stopColor="#a78bfa" stopOpacity="0.95" />
-                      <stop offset="100%" stopColor="#ff6ad5" stopOpacity="0.95" />
-                    </linearGradient>
-                    <filter id="ringGlow" x="-50%" y="-50%" width="200%" height="200%">
-                      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur1" />
-                      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
-                      <feMerge>
-                        <feMergeNode in="blur2" />
-                        <feMergeNode in="blur1" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  <g filter="url(#ringGlow)">
-                    <circle cx="60" cy="60" r="52" fill="none" stroke="url(#ringGrad)" strokeWidth="1.2" />
-                    <circle cx="60" cy="60" r="52" fill="none" stroke="url(#ringGrad)" strokeOpacity="0.28" strokeWidth="4" />
-                  </g>
-                </motion.svg>
-
-                <motion.img
-                  key={resume.avatar}
-                  src={new URL(`../assets/${resume.avatar}`, import.meta.url).href}
-                  alt="Profile photo"
-                  className="relative z-10 cursor-pointer w-48 h-48 md:w-56 md:h-56 rounded-full object-cover border border-white/10 shadow-glow"
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ opacity: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }, scale: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }}
-                  whileHover={{ scale: 1.18, rotate: 2 }}
-                  onHoverStart={() => setShowHi(true)}
-                  onHoverEnd={() => setShowHi(false)}
-                />
-
-                {showHi && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 6, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 6, scale: 0.95 }}
-                    transition={{ duration: 0.25 }}
-                    className="absolute -top-6 -right-6 z-20 px-4 py-1.5 rounded-full text-sm md:text-base font-semibold bg-gradient-to-r from-neon-blue/80 to-neon-violet/80 text-black shadow-glow"
-                  >
-                    Hi!
-                  </motion.div>
-                )}
-              </div>
+              <Avatar
+                src={new URL(`../assets/${resume.avatar}`, import.meta.url).href}
+                srcPleads={resume.avatarPleads ? new URL(`../assets/${resume.avatarPleads}`, import.meta.url).href : undefined}
+                alt={resume.name}
+              />
             ) : (
               <div className="w-48 h-48 md:w-56 md:h-56 rounded-full border border-dashed border-white/15 grid place-items-center text-slate-400">
                 Add your photo
@@ -245,7 +198,7 @@ export default function Hero() {
                       height: 7,
                       background: i % 2 === 0 ? '#4dd5ff' : '#a78bfa',
                       boxShadow: i % 2 === 0 ? '0 0 14px rgba(77,213,255,0.8), 0 0 22px rgba(77,213,255,0.5)'
-                                             : '0 0 14px rgba(167,139,250,0.8), 0 0 22px rgba(167,139,250,0.5)'
+                        : '0 0 14px rgba(167,139,250,0.8), 0 0 22px rgba(167,139,250,0.5)'
                     }}
                     initial={{ x: 0, y: 0, opacity: 0.95, scale: 1 }}
                     animate={{ x: [-8 - i * 5, -22 - i * 7], y: [-6 - i * 1.4, -24 - i * 2.4], opacity: [0.95, 0], scale: [1, 0] }}
@@ -288,6 +241,16 @@ export default function Hero() {
               </motion.svg>
             </motion.div>
           ), document.body)}
+        {/* Robot Trigger & Chatbot - Moved outside the glass card */}
+        {!isChatOpen && <RobotTrigger onClick={() => setIsChatOpen(true)} />}
+
+        <AnimatePresence>
+          {isChatOpen && (
+            <div className="absolute top-20 -right-20 md:-right-32 z-50">
+              <Chatbot onClose={() => setIsChatOpen(false)} />
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   )

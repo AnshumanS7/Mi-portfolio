@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Element, scroller } from 'react-scroll'
 import { ReactLenis } from '@studio-freight/react-lenis'
 import Navbar from './components/Navbar.jsx'
@@ -11,7 +11,8 @@ import Skills from './components/Skills.jsx'
 import Certifications from './components/Certifications.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
-import BackgroundFX from './components/BackgroundFX.jsx'
+import TheVoid from './components/TheVoid.jsx'
+import Aperture from './components/Aperture.jsx'
 
 function App() {
   useEffect(() => {
@@ -23,21 +24,24 @@ function App() {
 
   return (
     <ReactLenis root>
-      <div className="relative min-h-screen bg-grid-glow">
-        <div className="noise-overlay" />
-        <BackgroundFX />
-        <Navbar />
-        <main className="relative z-10">
-          <Element name="home"><Hero /></Element>
-          <Element name="about"><About /></Element>
-          <Element name="experience"><Experience /></Element>
-          <Element name="projects"><Projects /></Element>
-          <Element name="try"><TryThis /></Element>
-          <Element name="skills"><Skills /></Element>
-          <Element name="certifications"><Certifications /></Element>
-          <Element name="contact"><Contact /></Element>
-        </main>
-        <Footer />
+      <div className="relative min-h-screen text-slate-200">
+        <Aperture />
+
+        <div className="relative">
+          <TheVoid />
+          <Navbar />
+          <main className="relative z-10">
+            <Element name="home"><Hero /></Element>
+            <Element name="about"><About /></Element>
+            <Element name="experience"><Experience /></Element>
+            <Element name="projects"><Projects /></Element>
+            <Element name="try"><TryThis /></Element>
+            <Element name="skills"><Skills /></Element>
+            <Element name="certifications"><Certifications /></Element>
+            <Element name="contact"><Contact /></Element>
+          </main>
+          <Footer />
+        </div>
       </div>
     </ReactLenis>
   )

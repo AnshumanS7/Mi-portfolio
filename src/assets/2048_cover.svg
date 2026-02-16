@@ -1,0 +1,10 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="600" height="400" fill="#0f172a"/>
+<path d="M300 130C260 130 225 155 210 190C170 195 140 230 140 270C140 315 175 350 220 350H390C430 350 460 320 460 280C460 245 435 215 400 210C390 165 350 130 300 130Z" fill="#3b82f6" fill-opacity="0.2"/>
+<text x="300" y="260" font-family="monospace" font-size="40" fill="#3b82f6" text-anchor="middle" font-weight="bold">AWS EKS</text>
+<text x="300" y="300" font-family="monospace" font-size="24" fill="#60a5fa" text-anchor="middle">2048 Deployment</text>
+<circle cx="100" cy="100" r="2" fill="white"/>
+<circle cx="500" cy="300" r="2" fill="white"/>
+<circle cx="200" cy="50" r="2" fill="white"/>
+<path d="M0 400L600 400" stroke="#3b82f6" stroke-width="4"/>
+</svg>
