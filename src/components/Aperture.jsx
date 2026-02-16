@@ -59,15 +59,20 @@ export default function Aperture({ onOpen, onOpenStart, onShakeEnd }) {
 
             {/* Central Trigger Button */}
             {!isOpen && (
-                <div className="absolute z-[60] flex flex-col items-center justify-center gap-6">
+                <div className="absolute z-[60] flex items-center justify-center">
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 1 }}
-                        className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-400 font-bold text-xl tracking-wider uppercase drop-shadow-[0_0_10px_rgba(77,213,255,0.5)]"
+                        className="absolute bottom-32 text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-400 font-bold text-4xl md:text-5xl tracking-wider uppercase drop-shadow-[0_0_10px_rgba(77,213,255,0.5)] whitespace-nowrap"
                         style={{ fontFamily: '"Europa Grotesk SH", sans-serif' }}
                     >
-                        Press Enter to see my world
+                        Press <motion.span
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1, color: ['#67e8f9', '#d8b4fe', '#67e8f9'] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                            className="inline-block mx-2"
+                        >ENTER</motion.span> to see my world
                     </motion.p>
 
                     <motion.button
@@ -76,9 +81,9 @@ export default function Aperture({ onOpen, onOpenStart, onShakeEnd }) {
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={handleOpen}
-                        className="w-24 h-24 rounded-full bg-slate-950 border border-cyan-500/50 flex items-center justify-center cursor-pointer group shadow-[0_0_50px_rgba(77,213,255,0.2)]"
+                        className="relative w-24 h-24 rounded-full bg-slate-950 flex items-center justify-center cursor-pointer group shadow-[0_0_50px_rgba(77,213,255,0.2)]"
                     >
-                        <div className="absolute inset-0 rounded-full border border-t-cyan-500 border-r-transparent border-b-purple-500 border-l-transparent animate-spin" />
+                        <div className="absolute inset-0 rounded-full border-2 border-t-cyan-500 border-r-transparent border-b-purple-500 border-l-transparent animate-spin" />
                         <span className="text-xs font-bold tracking-widest text-white group-hover:text-cyan-400 transition-colors">
                             ENTER
                         </span>

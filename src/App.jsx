@@ -11,7 +11,7 @@ import Skills from './components/Skills.jsx'
 import Certifications from './components/Certifications.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
-import TheVoid from './components/TheVoid.jsx'
+import QuantumField from './components/QuantumField.jsx'
 import Aperture from './components/Aperture.jsx'
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
         <Aperture />
 
         <div className="relative">
-          <TheVoid />
+          <QuantumField />
           <Navbar />
           <main className="relative z-10">
             <Element name="home"><Hero /></Element>
