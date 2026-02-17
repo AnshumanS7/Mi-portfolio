@@ -30,15 +30,15 @@ export default function RobotTrigger({ onClick }) {
 
             {/* Chatting? Bubble */}
             <motion.div
-                className="absolute -top-12 -left-4 pointer-events-none"
+                className="absolute -top-14 -left-8 pointer-events-none"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1 }}
             >
-                <div className="relative bg-white text-slate-900 px-3 py-1.5 rounded-xl rounded-br-none shadow-lg border border-cyan-400/50 text-xs font-bold whitespace-nowrap">
-                    Chatting? 🤖
+                <div className="relative bg-slate-900/90 backdrop-blur-xl text-cyan-300 px-4 py-2 rounded-xl rounded-br-none shadow-[0_0_15px_rgba(34,211,238,0.3)] border border-cyan-500/60 text-xs font-bold tracking-wide uppercase whitespace-nowrap">
+                    Chatting?
                 </div>
-                <div className="absolute -bottom-1 left-4 w-2 h-2 bg-white rounded-full" />
+                <div className="absolute -bottom-1 left-4 w-2 h-2 bg-slate-900/90 rounded-full border border-cyan-500/60" />
             </motion.div>
 
         </motion.div>

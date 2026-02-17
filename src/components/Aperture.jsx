@@ -23,7 +23,7 @@ export default function Aperture({ onOpen, onOpenStart, onShakeEnd }) {
     if (isGone) return null
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-auto">
+        <div className={`fixed inset-0 z-[100] flex items-center justify-center ${isOpen ? 'pointer-events-none' : 'pointer-events-auto'}`}>
 
             {/* Northern Triangle */}
             <motion.div

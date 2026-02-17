@@ -1,62 +1,19 @@
 import { useState, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function Avatar({ src, srcPleads, alt = "Avatar" }) {
     const [isPleading, setIsPleading] = useState(false);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
-    const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
-
-    function handleMouseMove({ currentTarget, clientX, clientY }) {
-        const { left, top, width, height } = currentTarget.getBoundingClientRect();
-        const xPct = (clientX - left) / width - 0.5;
-        const yPct = (clientY - top) / height - 0.5;
-        x.set(xPct);
-        y.set(yPct);
-    }
-
-    function handleMouseLeave() {
-        x.set(0);
-        y.set(0);
-    }
-
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["15deg", "-15deg"]);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-15deg", "15deg"]);
-    const glowX = useTransform(mouseX, [-0.5, 0.5], [5, -5]);
-    const glowY = useTransform(mouseY, [-0.5, 0.5], [5, -5]);
-
     return (
         <motion.div
-            style={{
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d",
-            }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
             onClick={() => setIsPleading(!isPleading)}
-            className="relative w-80 h-80 md:w-96 md:h-96 perspective-1000 cursor-pointer z-50"
+            className="relative w-80 h-80 md:w-96 md:h-96 cursor-pointer z-50"
             whileHover={{ scale: 1.1 }} // Scale parent for reliable zoom
             whileTap={{ scale: 0.95 }}
         >
-            {/* 3D Content Container */}
-            <motion.div
-                style={{
-                    transform: "translateZ(50px)",
-                    transformStyle: "preserve-3d",
-                }}
-                className="relative w-full h-full group"
-            >
+            {/* Content Container */}
+            <div className="relative w-full h-full group">
                 {/* Glow Effect - Adjusted to be behind image */}
-                <motion.div
-                    style={{
-                        x: glowX,
-                        y: glowY,
-                    }}
-                    className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl rounded-full"
-                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl rounded-full" />
 
                 {/* Happy Effect Overlay (Sun/Sparkles) */}
                 {!isPleading && (
@@ -137,8 +94,7 @@ export default function Avatar({ src, srcPleads, alt = "Avatar" }) {
                         ))}
                     </motion.div>
                 )}
-            </motion.div>
-
+            </div>
 
             {/* Prompt Cloud (Before Click) */}
             {!isPleading && (
@@ -146,15 +102,14 @@ export default function Avatar({ src, srcPleads, alt = "Avatar" }) {
                     initial={{ opacity: 0, y: 10, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ delay: 2, duration: 0.5 }}
-                    style={{ transform: "translateZ(80px)" }}
-                    className="absolute -top-6 -left-2 pointer-events-none"
+                    className="absolute -top-4 -left-2 pointer-events-none"
                 >
-                    <div className="relative bg-white/90 backdrop-blur-md text-slate-900 px-3 py-2 rounded-[1rem] shadow-lg border border-cyan-400/50 text-xs font-bold whitespace-nowrap z-10">
-                        Hi, Click me! 👆
+                    <div className="relative bg-slate-900/90 backdrop-blur-xl text-cyan-100 px-3 py-1.5 rounded-lg border border-cyan-500/50 shadow-[0_0_15px_rgba(34,211,238,0.2)] text-[10px] font-bold tracking-wide uppercase whitespace-nowrap z-10">
+                        Hi, Click me!
                     </div>
                     {/* Cloud Bubbles Tail */}
-                    <div className="absolute -bottom-1 right-4 w-2 h-2 bg-white/90 rounded-full border border-cyan-400/50 z-0" />
-                    <div className="absolute -bottom-3 right-3 w-1.5 h-1.5 bg-white/90 rounded-full border border-cyan-400/50 z-0" />
+                    <div className="absolute -bottom-1 right-3 w-1.5 h-1.5 bg-slate-900/90 rounded-full border border-cyan-500/50 z-0" />
+                    <div className="absolute -bottom-2 right-2 w-1 h-1 bg-slate-900/90 rounded-full border border-cyan-500/50 z-0" />
                 </motion.div>
             )}
 
@@ -164,15 +119,14 @@ export default function Avatar({ src, srcPleads, alt = "Avatar" }) {
                     initial={{ opacity: 0, scale: 0, y: 20, x: -20 }}
                     animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
                     exit={{ opacity: 0, scale: 0, y: 10 }}
-                    style={{ transform: "translateZ(100px)" }}
-                    className="absolute -top-8 -right-4 pointer-events-none"
+                    className="absolute -top-6 -right-4 pointer-events-none"
                 >
-                    <div className="relative bg-white text-slate-900 px-4 py-2 rounded-[1.5rem] shadow-[0_0_20px_rgba(255,255,255,0.4)] border-2 border-cyan-400 font-bold text-base whitespace-nowrap z-10">
-                        Please Hire me! 🥺
+                    <div className="relative bg-slate-900/90 backdrop-blur-xl text-cyan-300 px-3 py-2 rounded-lg border border-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.4)] font-bold text-xs tracking-wide uppercase whitespace-nowrap z-10">
+                        Please Hire me!
                     </div>
                     {/* Cloud Bubbles Tail */}
-                    <div className="absolute -bottom-2 left-4 w-3 h-3 bg-white rounded-full border border-cyan-400 z-0" />
-                    <div className="absolute -bottom-4 left-2 w-1.5 h-1.5 bg-white rounded-full border border-cyan-400 z-0" />
+                    <div className="absolute -bottom-1 left-4 w-2 h-2 bg-slate-900/90 rounded-full border border-cyan-400 z-0" />
+                    <div className="absolute -bottom-3 left-3 w-1 h-1 bg-slate-900/90 rounded-full border border-cyan-400 z-0" />
                 </motion.div>
             )}
         </motion.div>

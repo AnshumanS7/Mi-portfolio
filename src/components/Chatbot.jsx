@@ -8,10 +8,15 @@ export default function Chatbot({ onClose }) {
         { text: "Hi! I'm Anshuman's virtual assistant. Ask me about his skills, projects, or experience!", sender: 'bot' }
     ]);
     const [input, setInput] = useState('');
-    const messagesEndRef = useRef(null);
+    const messagesContainerRef = useRef(null);
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        if (messagesContainerRef.current) {
+            messagesContainerRef.current.scrollTo({
+                top: messagesContainerRef.current.scrollHeight,
+                behavior: "smooth"
+            });
+        }
     };
 
     useEffect(() => {
@@ -59,18 +64,18 @@ export default function Chatbot({ onClose }) {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-4">
                 {messages.map((msg, idx) => (
                     <div key={idx} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                         <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.sender === 'user'
-                                ? 'bg-cyan-600 text-white rounded-tr-none'
-                                : 'bg-slate-800 text-slate-200 rounded-tl-none border border-white/10'
+                            ? 'bg-cyan-600 text-white rounded-tr-none'
+                            : 'bg-slate-800 text-slate-200 rounded-tl-none border border-white/10'
                             }`}>
                             {msg.text}
                         </div>
                     </div>
                 ))}
-                <div ref={messagesEndRef} />
+
             </div>
 
             {/* Input */}
