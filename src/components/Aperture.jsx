@@ -64,7 +64,7 @@ export default function Aperture({ onOpen, onOpenStart, onShakeEnd }) {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 1 }}
-                        className="absolute bottom-24 md:bottom-32 text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-400 font-bold text-2xl md:text-5xl tracking-wider uppercase drop-shadow-[0_0_10px_rgba(77,213,255,0.5)] whitespace-nowrap"
+                        className="absolute bottom-24 md:bottom-32 text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-400 font-bold text-lg md:text-5xl tracking-widest md:tracking-wider uppercase drop-shadow-[0_0_10px_rgba(77,213,255,0.5)] whitespace-nowrap"
                         style={{ fontFamily: '"Europa Grotesk SH", sans-serif' }}
                     >
                         Press <motion.span

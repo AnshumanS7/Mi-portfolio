@@ -246,7 +246,7 @@ export default function Hero() {
 
         <AnimatePresence>
           {isChatOpen && (
-            <div className="absolute top-36 right-0 md:-right-32 z-50">
+            <div className="absolute top-60 right-0 md:-right-32 z-50">
               <Chatbot onClose={() => setIsChatOpen(false)} />
             </div>
           )}
