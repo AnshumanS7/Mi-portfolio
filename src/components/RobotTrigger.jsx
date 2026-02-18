@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export default function RobotTrigger({ onClick }) {
     return (
         <motion.div
-            className="absolute top-20 -right-20 md:-right-32 z-50 cursor-pointer group"
+            className="absolute top-36 right-0 md:-right-32 z-50 cursor-pointer group"
             onClick={onClick}
             initial={{ y: 0 }}
             animate={{ y: [0, -10, 0] }}

@@ -39,7 +39,7 @@ export default function Hero() {
   const xGlow = useTransform(xMv, (v) => v - 12)
   const yGlow = useTransform(yMv, (v) => v - 8)
   return (
-    <section className="relative pt-40 pb-24 md:pt-48 md:pb-28">
+    <section className="relative pt-28 pb-20 md:pt-48 md:pb-28">
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <motion.div
           className="glass rounded-3xl p-8 md:p-12 shadow-glow relative overflow-hidden grid md:grid-cols-2 gap-8 items-center"
@@ -49,7 +49,7 @@ export default function Hero() {
           viewport={{ once: true, amount: 0.4 }}
         >
           <div>
-            <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-extrabold font-poppins mt-2 leading-tight">
+            <motion.h1 variants={fadeInUp} className="text-3xl md:text-6xl font-extrabold font-poppins mt-2 leading-tight">
               <span className="gradient-text">{resume.name}</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className="text-lg md:text-xl mt-4 text-slate-300">
@@ -246,7 +246,7 @@ export default function Hero() {
 
         <AnimatePresence>
           {isChatOpen && (
-            <div className="absolute top-20 -right-20 md:-right-32 z-50">
+            <div className="absolute top-36 right-0 md:-right-32 z-50">
               <Chatbot onClose={() => setIsChatOpen(false)} />
             </div>
           )}

@@ -26,7 +26,7 @@ export default function ProjectDeck() {
                         const center = (projects.length - 1) / 2
                         const dist = index - center
                         const rotate = dist * 5
-                        const x = dist * 40
+                        const x = dist * (window.innerWidth < 768 ? 20 : 40)
                         const y = Math.abs(dist) * 10
 
                         return (
@@ -50,7 +50,7 @@ export default function ProjectDeck() {
                                     zIndex: 40,
                                     transition: { duration: 0.2 }
                                 } : {}}
-                                className={`absolute cursor-pointer w-64 h-96 md:w-80 md:h-[450px] rounded-2xl p-6 border transition-shadow duration-300
+                                className={`absolute cursor-pointer w-56 h-80 md:w-80 md:h-[450px] rounded-2xl p-6 border transition-shadow duration-300
                     ${isSelected
                                         ? 'bg-slate-900/95 border-neon-blue shadow-[0_0_50px_rgba(77,213,255,0.3)]'
                                         : 'bg-slate-800/80 border-white/10 shadow-xl hover:shadow-glow hover:border-white/30 backdrop-blur-sm'
