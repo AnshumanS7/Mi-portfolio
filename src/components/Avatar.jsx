@@ -119,14 +119,14 @@ export default function Avatar({ src, srcPleads, alt = "Avatar" }) {
                     initial={{ opacity: 0, scale: 0, y: 20, x: -20 }}
                     animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
                     exit={{ opacity: 0, scale: 0, y: 10 }}
-                    className="absolute -top-6 -right-4 pointer-events-none"
+                    className="absolute -top-12 right-0 md:-top-6 md:-right-4 pointer-events-none w-full flex justify-end pr-4 md:block md:w-auto md:pr-0"
                 >
                     <div className="relative bg-slate-900/90 backdrop-blur-xl text-cyan-300 px-3 py-2 rounded-lg border border-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.4)] font-bold text-xs tracking-wide uppercase whitespace-nowrap z-10">
                         Please Hire me!
                     </div>
-                    {/* Cloud Bubbles Tail */}
-                    <div className="absolute -bottom-1 left-4 w-2 h-2 bg-slate-900/90 rounded-full border border-cyan-400 z-0" />
-                    <div className="absolute -bottom-3 left-3 w-1 h-1 bg-slate-900/90 rounded-full border border-cyan-400 z-0" />
+                    {/* Cloud Bubbles Tail - Mobile Right vs Desktop Right */}
+                    <div className="absolute -bottom-1 right-8 md:left-4 md:right-auto w-2 h-2 bg-slate-900/90 rounded-full border border-cyan-400 z-0" />
+                    <div className="absolute -bottom-3 right-10 md:left-3 md:right-auto w-1 h-1 bg-slate-900/90 rounded-full border border-cyan-400 z-0" />
                 </motion.div>
             )}
         </motion.div>
